@@ -1,24 +1,14 @@
-version: "3"
+version: '3.3'
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
-    ports:
-      - "8053:53/tcp"
-      - "8053:53/udp"
-      - "8067:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "8080:80/tcp"
-    environment:
-      TZ: 'Europe/Belgrade'
-      # WEBPASSWORD: 'set a secure password here or it will be random'
-    # Volumes store your data between container upgrades
-    volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
-    restart: unless-stopped
+    data:
+        ports:
+            - '9000:9000'
+            - '9090:9090'
+        container_name: minio
+        volumes:
+            - '~/minio/data:/data'
+        environment:
+            - MINIO_ROOT_USER=ROOTNAME
+            - MINIO_ROOT_PASSWORD=CHANGEME123
+        image: /data
