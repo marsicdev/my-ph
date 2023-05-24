@@ -16,6 +16,7 @@ services:
         volumes:
             - './storage:/verdaccio/storage'
             - './plugins:/verdaccio/plugins'
+            - 'config.yaml:/verdaccio/conf/config.yaml'
 networks:
     node-network:
         driver: bridge
