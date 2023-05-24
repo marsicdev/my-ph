@@ -1,24 +1,19 @@
-version: "3"
+version: '3.1'
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
-    ports:
-      - "8053:53/tcp"
-      - "8053:53/udp"
-      - "8067:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "8080:80/tcp"
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: 'verdaccio'
+    networks:
+      - node-network
     environment:
-      TZ: 'Europe/Belgrade'
-      # WEBPASSWORD: 'set a secure password here or it will be random'
-    # Volumes store your data between container upgrades
+      - VERDACCIO_PORT=4873
+    ports:
+      - '4873:4873'
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
-    restart: unless-stopped
+      - './storage:/verdaccio/storage'
+      - './config:/verdaccio/conf'
+      - './plugins:/verdaccio/plugins'
+networks:
+  node-network:
+    driver: bridge
