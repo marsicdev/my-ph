@@ -24,18 +24,18 @@ web:
   # comment out to disable gravatar support
   # gravatar: false
   # by default packages are ordercer ascendant (asc|desc)
-  # sort_packages: asc
+  sort_packages: asc
   # convert your UI to the dark side
-  # darkMode: true
+  darkMode: true
   # html_cache: true
   # by default all features are displayed
-  # login: true
-  # showInfo: true
-  # showSettings: true
+  login: true
+  showInfo: true
+  showSettings: true
   # In combination with darkMode you can force specific theme
-  # showThemeSwitch: true
+  showThemeSwitch: true
   # showFooter: true
-  # showSearch: true
+  showSearch: true
   # showRaw: true
   # showDownloadTarball: true
   #  HTML tags injected after manifest <scripts/>
@@ -58,7 +58,7 @@ auth:
     file: /verdaccio/storage/htpasswd
     # Maximum amount of users allowed to register, defaults to "+infinity".
     # You can set this to -1 to disable registration.
-    # max_users: 1000
+    max_users: 1
     # Hash algorithm, possible options are: "bcrypt", "md5", "sha1", "crypt".
     # algorithm: bcrypt # by default is crypt, but is recommended use bcrypt for new installations
     # Rounds number for "bcrypt", will be ignored for other algorithms.
@@ -74,14 +74,14 @@ uplinks:
 # https://verdaccio.org/docs/protect-your-dependencies/
 # https://verdaccio.org/docs/configuration#packages
 packages:
-  '@*/*':
+  "@*/*":
     # scoped packages
     access: $all
     publish: $authenticated
     unpublish: $authenticated
     proxy: npmjs
 
-  '**':
+  "**":
     # allow all users (including non-authenticated users) to read and
     # publish all packages
     #
