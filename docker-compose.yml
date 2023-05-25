@@ -9,11 +9,12 @@ services:
         environment:
             - VERDACCIO_PORT=4873
             - VERDACCIO_PROTOCOL=https
+            - VERDACCIO_USER_UID=114
         ports:
             - '4873:4873'
         volumes:
-            - './config:/verdaccio/config'
             - './storage:/verdaccio/storage'
+            - './config:/verdaccio/conf'
             - './plugins:/verdaccio/plugins'
 networks:
     node-network:
