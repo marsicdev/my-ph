@@ -9,13 +9,12 @@ services:
         environment:
             - VERDACCIO_PORT=4873
             - VERDACCIO_PROTOCOL=https
-            - VERDACCIO_USER_UID=114
         ports:
             - '4873:4873'
         volumes:
-            - './storage:/verdaccio/storage'
-            - './config:/verdaccio/config'
-            - './plugins:/verdaccio/plugins'
+            - './verdaccio/storage:/verdaccio/storage'
+            - './verdaccio/conf:/verdaccio/conf'
+            - './verdaccio/plugins:/verdaccio/plugins'
 networks:
     node-network:
         driver: bridge
